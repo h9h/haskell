@@ -1,0 +1,59 @@
+cabal-version:      2.4
+name:               haskell
+version:            0.1.0.0
+
+synopsis:
+    Common idiomatic patterns in haskell
+
+
+license:            MIT
+author:             Michael Heinke
+maintainer:         git@h9h.de
+
+category:           Development
+build-type:         Simple
+
+common base
+  ghc-options:        -Wall -Wno-type-defaults
+  default-language:   GHC2021
+  build-depends:
+    , base        ^>=4.16.3.0
+
+  default-extensions:
+    BlockArguments
+    OverloadedStrings
+
+common exec
+  import:        base
+  build-depends: haskell
+
+library
+  import:          base
+  build-depends:
+    , directory         ^>=1.3
+    , filepath          ^>=1.4
+    , template-haskell  ^>=2.18
+
+  hs-source-dirs:  lib
+  exposed-modules: Utils
+  -- other-modules:   ...
+
+executable parsing
+  import:         exec
+  hs-source-dirs: parsing
+  main-is:        Main.hs
+  build-depends:
+    , megaparsec  ^>=9.2.0
+
+executable controls
+  import:         exec
+  hs-source-dirs: controls
+  main-is:        Main.hs
+  build-depends:
+
+executable containers
+  import:         exec
+  hs-source-dirs: containers
+  main-is:        Main.hs
+  build-depends:
+    , containers  ^>=0.6
